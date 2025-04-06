@@ -1,14 +1,41 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react"
+import { Linkedin } from "lucide-react"
+import { useTheme } from "next-themes"
+import { useEffect, useState } from "react"
 
 export default function Footer() {
+  const { resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  // After mounting, we can safely show the UI that depends on the theme
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return (
+      <footer className="w-full md:w-[90%] mx-auto py-12 rounded-tl-4xl rounded-tr-4xl">
+        <div className="container mx-auto px-4 md:px-8">{/* Placeholder content */}</div>
+      </footer>
+    )
+  }
+
+  const isDark = resolvedTheme === "dark"
+
   return (
-    <footer className="w-full py-12 bg-gray-100 dark:bg-zinc-950 border-t border-gray-200/50 dark:border-zinc-800/20">
+    <footer
+      className={`w-full md:w-[90%] mx-auto py-12 rounded-tl-4xl rounded-tr-4xl ${
+        isDark
+          ? "bg-gradient-to-b from-deep-green to-green-900/90 text-white"
+          : "bg-gradient-to-b from-deep-green/90 to-[#017A34]/80 text-white"
+      }`}
+    >
       <div className="container mx-auto px-4 md:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div className="space-y-4">
             <div className="flex items-center">
               <div className="relative w-8 h-8 mr-2">
@@ -20,79 +47,42 @@ export default function Footer() {
                   className="object-contain"
                 />
               </div>
-              <span className="text-xl font-bold text-zinc-900 dark:text-white">Swastify</span>
+              <span className="text-xl font-bold text-white">Swastify</span>
             </div>
-            <p className="text-zinc-600 dark:text-gray-400">
-              Where Healthcare Meets Innovation. Building solutions to real healthcare problems.
+            <p className="text-white/80">
+              Where Healthcare Meets Innovation. <br /> Building solutions to real healthcare problems.
             </p>
             <div className="flex space-x-4">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-zinc-600 dark:text-gray-400 hover:text-deep-green dark:hover:text-light-green"
-              >
-                <Facebook className="h-5 w-5" />
-                <span className="sr-only">Facebook</span>
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-zinc-600 dark:text-gray-400 hover:text-deep-green dark:hover:text-light-green"
-              >
-                <Twitter className="h-5 w-5" />
-                <span className="sr-only">Twitter</span>
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-zinc-600 dark:text-gray-400 hover:text-deep-green dark:hover:text-light-green"
-              >
-                <Instagram className="h-5 w-5" />
-                <span className="sr-only">Instagram</span>
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-zinc-600 dark:text-gray-400 hover:text-deep-green dark:hover:text-light-green"
-              >
-                <Linkedin className="h-5 w-5" />
-                <span className="sr-only">LinkedIn</span>
-              </Button>
+
+              <Link href="https://www.linkedin.com/company/getswastify/" target="_blank" rel="noopener noreferrer">
+  <Button variant="ghost" size="icon" className="text-white/80 hover:text-white hover:bg-white/10">
+    <Linkedin className="h-5 w-5" />
+    <span className="sr-only">LinkedIn</span>
+  </Button>
+</Link>
             </div>
           </div>
 
           <div>
-            <h3 className="text-zinc-900 dark:text-white font-medium mb-4">Quick Links</h3>
+            <h3 className="text-white font-medium mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link
-                  href="/"
-                  className="text-zinc-600 dark:text-gray-400 hover:text-deep-green dark:hover:text-light-green transition-colors"
-                >
+                <Link href="/" className="text-white/80 hover:text-white transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/about"
-                  className="text-zinc-600 dark:text-gray-400 hover:text-deep-green dark:hover:text-light-green transition-colors"
-                >
+                <Link href="/about" className="text-white/80 hover:text-white transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/mission"
-                  className="text-zinc-600 dark:text-gray-400 hover:text-deep-green dark:hover:text-light-green transition-colors"
-                >
+                <Link href="/mission" className="text-white/80 hover:text-white transition-colors">
                   Our Mission
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/contact"
-                  className="text-zinc-600 dark:text-gray-400 hover:text-deep-green dark:hover:text-light-green transition-colors"
-                >
+                <Link href="/contact" className="text-white/80 hover:text-white transition-colors">
                   Contact
                 </Link>
               </li>
@@ -100,85 +90,47 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-zinc-900 dark:text-white font-medium mb-4">Resources</h3>
+            <h3 className="text-white font-medium mb-4">Legal</h3>
             <ul className="space-y-2">
               <li>
-                <Link
-                  href="#"
-                  className="text-zinc-600 dark:text-gray-400 hover:text-deep-green dark:hover:text-light-green transition-colors"
-                >
-                  Healthcare Guides
+                <Link href="/privacy-policy" className="text-white/80 hover:text-white transition-colors">
+                  Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link
-                  href="#"
-                  className="text-zinc-600 dark:text-gray-400 hover:text-deep-green dark:hover:text-light-green transition-colors"
-                >
-                  Patient Rights
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-zinc-600 dark:text-gray-400 hover:text-deep-green dark:hover:text-light-green transition-colors"
-                >
-                  Success Stories
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-zinc-600 dark:text-gray-400 hover:text-deep-green dark:hover:text-light-green transition-colors"
-                >
-                  FAQ
+                <Link href="/terms-of-service" className="text-white/80 hover:text-white transition-colors">
+                  Terms of Service
                 </Link>
               </li>
             </ul>
           </div>
 
-          <div>
-            <h3 className="text-zinc-900 dark:text-white font-medium mb-4">Stay Updated</h3>
-            <p className="text-zinc-600 dark:text-gray-400 mb-4">
-              Subscribe to our newsletter for the latest healthcare solutions.
-            </p>
+          {/* <div>
+            <h3 className="text-white font-medium mb-4">Stay Updated</h3>
+            <p className="text-white/80 mb-4">Subscribe to our newsletter for the latest healthcare solutions.</p>
             <div className="flex gap-2">
               <Input
                 type="email"
                 placeholder="Your email"
-                className="bg-gray-50 dark:bg-zinc-900 border-gray-200 dark:border-zinc-800 focus:border-deep-green dark:focus:border-light-green focus:ring-deep-green/20 dark:focus:ring-light-green/20 text-zinc-900 dark:text-white"
+                className="bg-white/20 border-white/30 focus:border-white focus:ring-white/20 text-white placeholder:text-white/70"
               />
-              <Button className="bg-deep-green hover:bg-deep-green/90 dark:bg-light-green dark:hover:bg-light-green/90 text-white dark:text-zinc-950 font-medium transition-all duration-200">
+              <Button
+                className={`${
+                  isDark
+                    ? "bg-light-green hover:bg-light-green/90 text-zinc-900"
+                    : "bg-white hover:bg-white/90 text-deep-green"
+                } font-medium transition-all duration-200`}
+              >
                 Subscribe
               </Button>
             </div>
-          </div>
+          </div> */}
         </div>
 
-        <div className="border-t border-gray-200 dark:border-zinc-800/50 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-zinc-500 dark:text-gray-500 text-sm mb-4 md:mb-0">
+        <div className="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-center items-center">
+          <p className="text-white/70 text-sm mb-4 md:mb-0">
             &copy; {new Date().getFullYear()} Swastify. All rights reserved.
           </p>
-          <div className="flex gap-6">
-            <Link
-              href="#"
-              className="text-zinc-500 dark:text-gray-500 text-sm hover:text-deep-green dark:hover:text-light-green transition-colors"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href="#"
-              className="text-zinc-500 dark:text-gray-500 text-sm hover:text-deep-green dark:hover:text-light-green transition-colors"
-            >
-              Terms of Service
-            </Link>
-            <Link
-              href="#"
-              className="text-zinc-500 dark:text-gray-500 text-sm hover:text-deep-green dark:hover:text-light-green transition-colors"
-            >
-              Cookie Policy
-            </Link>
-          </div>
         </div>
       </div>
     </footer>
