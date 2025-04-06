@@ -127,9 +127,6 @@ export default function MissionPage() {
                     Developing better systems for coordinating care across different providers and specialties.
                   </p>
                 </div>
-
-
-
               </div>
 
               <div className="bg-deep-green/10 dark:bg-light-green/10 p-6 rounded-lg my-12 border border-deep-green/20 dark:border-light-green/20 text-center">

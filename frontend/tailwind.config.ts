@@ -60,6 +60,9 @@ const config: Config = {
         "green-gradient": "linear-gradient(to right, var(--color-light-green), var(--color-deep-green))",
         "dark-gradient": "linear-gradient(to top, #15803d, #18181b)",
       },
+      animation: {
+        "pulse-slow": "pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

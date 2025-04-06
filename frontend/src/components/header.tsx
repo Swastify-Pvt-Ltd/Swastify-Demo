@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
 import { Menu } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { usePathname } from "next/navigation"
@@ -83,7 +83,8 @@ export default function Header() {
             </Button>
           </SheetTrigger>
           <SheetContent side="right" className="bg-white dark:bg-zinc-900 border-gray-200 dark:border-zinc-800">
-            <nav className="flex flex-col space-y-6 mt-10">
+            <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+            <nav className="flex flex-col space-y-8 mt-6 px-2">
               <Link
                 href="/"
                 className={`text-lg ${
@@ -124,7 +125,7 @@ export default function Header() {
               >
                 Contact
               </Link>
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center pt-2">
                 <span className="text-zinc-900 dark:text-white text-lg">Theme</span>
                 <ThemeToggle />
               </div>

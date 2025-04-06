@@ -27,7 +27,7 @@ const formSchema = z.object({
 export default function FeedbackForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
-  const [submissionCount, setSubmissionCount] = useState(128) // Example count
+  // Removed submission count state
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
@@ -65,7 +65,6 @@ export default function FeedbackForm() {
       if (supabaseError) throw new Error(supabaseError.message)
 
       setIsSuccess(true)
-      setSubmissionCount((prev) => prev + 1)
 
       // Show success toast
       toast.success("Feedback submitted successfully", {
@@ -146,26 +145,19 @@ export default function FeedbackForm() {
               <p className={`mb-6 ${isDark ? "text-gray-300" : "text-zinc-700"}`}>
                 Your feedback has been submitted successfully. We appreciate your contribution to improving healthcare.
               </p>
-              <div className={`flex items-center justify-center gap-1 ${isDark ? "text-gray-300" : "text-zinc-600"}`}>
-                <div className="flex -space-x-2">
-                  <div className="w-8 h-8 rounded-full bg-deep-green flex items-center justify-center text-white text-xs">
-                    JD
-                  </div>
-                  <div className="w-8 h-8 rounded-full bg-light-green flex items-center justify-center text-navy text-xs">
-                    AS
-                  </div>
-                  <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-xs">
-                    MK
-                  </div>
-                </div>
-                <span className="ml-2">{submissionCount}+ people have shared their experiences</span>
+              <div className="text-center">
+                <p className={`${isDark ? "text-gray-300" : "text-zinc-600"} text-sm italic`}>
+                  Thank you for helping us improve healthcare
+                </p>
               </div>
             </div>
           ) : (
             <div
               className={`${
-                isDark ? "bg-navy-light/30 border-light-green/20" : "bg-white border-deep-green/20"
-              } backdrop-blur-md rounded-xl p-8 border shadow-lg`}
+                isDark
+                  ? "bg-navy-light/30 border-light-green/20"
+                  : "bg-white/95 border-deep-green/20 shadow-[0_8px_30px_rgb(0,0,0,0.08)] light-theme-professional"
+              } backdrop-blur-md rounded-xl p-8 border transition-all duration-300 hover:shadow-[0_10px_40px_rgb(1,122,52,0.1)]`}
             >
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -183,7 +175,7 @@ export default function FeedbackForm() {
                               className={`${
                                 isDark
                                   ? "bg-navy-lighter/50 border-light-green/20 focus:border-light-green focus:ring-light-green/20 text-white placeholder:text-gray-400"
-                                  : "bg-gray-50 border-deep-green/20 focus:border-deep-green focus:ring-deep-green/20 text-zinc-900 placeholder:text-gray-500"
+                                  : "bg-white border-gray-200 focus:border-deep-green focus:ring-deep-green/20 text-zinc-900 placeholder:text-gray-500 shadow-sm transition-all duration-200 hover:border-deep-green/40"
                               }`}
                             />
                           </FormControl>
@@ -206,7 +198,7 @@ export default function FeedbackForm() {
                               className={`${
                                 isDark
                                   ? "bg-navy-lighter/50 border-light-green/20 focus:border-light-green focus:ring-light-green/20 text-white placeholder:text-gray-400"
-                                  : "bg-gray-50 border-deep-green/20 focus:border-deep-green focus:ring-deep-green/20 text-zinc-900 placeholder:text-gray-500"
+                                  : "bg-white border-gray-200 focus:border-deep-green focus:ring-deep-green/20 text-zinc-900 placeholder:text-gray-500 shadow-sm transition-all duration-200 hover:border-deep-green/40"
                               }`}
                             />
                           </FormControl>
@@ -228,7 +220,7 @@ export default function FeedbackForm() {
                               className={`${
                                 isDark
                                   ? "bg-navy-lighter/50 border-light-green/20 focus:border-light-green focus:ring-light-green/20 text-white"
-                                  : "bg-gray-50 border-deep-green/20 focus:border-deep-green focus:ring-deep-green/20 text-zinc-900"
+                                  : "bg-white border-gray-200 focus:border-deep-green focus:ring-deep-green/20 text-zinc-900 shadow-sm transition-all duration-200 hover:border-deep-green/40"
                               }`}
                             >
                               <SelectValue placeholder="Select your occupation" />
@@ -269,7 +261,7 @@ export default function FeedbackForm() {
                             className={`${
                               isDark
                                 ? "bg-navy-lighter/50 border-light-green/20 focus:border-light-green focus:ring-light-green/20 text-white placeholder:text-gray-400"
-                                : "bg-gray-50 border-deep-green/20 focus:border-deep-green focus:ring-deep-green/20 text-zinc-900 placeholder:text-gray-500"
+                                : "bg-white border-gray-200 focus:border-deep-green focus:ring-deep-green/20 text-zinc-900 placeholder:text-gray-500 shadow-sm transition-all duration-200 hover:border-deep-green/40"
                             } resize-none`}
                           />
                         </FormControl>
@@ -287,7 +279,7 @@ export default function FeedbackForm() {
                       isDark
                         ? "bg-light-green hover:bg-light-green/90 text-navy"
                         : "bg-gradient-to-r from-deep-green to-deep-green/90 hover:from-deep-green/90 hover:to-deep-green text-white"
-                    } font-medium py-6 rounded-md shadow-md text-lg transition-colors duration-300`}
+                    } font-medium py-6 rounded-md shadow-lg hover:shadow-xl hover:shadow-deep-green/20 text-lg transition-all duration-300 transform hover:-translate-y-0.5`}
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? "Submitting..." : "Submit Feedback"}
@@ -295,21 +287,10 @@ export default function FeedbackForm() {
                 </form>
               </Form>
 
-              <div
-                className={`mt-6 flex items-center justify-center gap-1 ${isDark ? "text-gray-300" : "text-zinc-600"}`}
-              >
-                <div className="flex -space-x-2">
-                  <div className="w-8 h-8 rounded-full bg-deep-green flex items-center justify-center text-white text-xs">
-                    JD
-                  </div>
-                  <div className="w-8 h-8 rounded-full bg-light-green flex items-center justify-center text-navy text-xs">
-                    AS
-                  </div>
-                  <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-xs">
-                    MK
-                  </div>
-                </div>
-                <span className="ml-2">{submissionCount}+ people have shared their experiences</span>
+              <div className="mt-6 text-center">
+                <p className={`${isDark ? "text-gray-300" : "text-zinc-600"} text-sm italic`}>
+                  Your feedback helps us build better healthcare solutions
+                </p>
               </div>
             </div>
           )}

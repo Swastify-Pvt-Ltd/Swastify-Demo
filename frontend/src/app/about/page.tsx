@@ -21,7 +21,7 @@ export default function AboutPage() {
 
             <div className="mb-12 relative rounded-xl overflow-hidden h-64 md:h-96">
               <Image
-                src="/images/swastify-cover.png"
+                src="/images/team.jpg"
                 alt="Swastify Team"
                 width={800}
                 height={400}
@@ -34,9 +34,6 @@ export default function AboutPage() {
                 Swastify was founded in 2025 with a simple yet powerful mission: to transform healthcare by listening to
                 the people who matter most—patients, caregivers, and healthcare professionals.
               </p>
-
-              
-            
 
               <h2 className="text-2xl font-bold mt-8 mb-4 text-zinc-900 dark:text-white">Our Team</h2>
               <p className="text-zinc-700 dark:text-gray-300 mb-6">
