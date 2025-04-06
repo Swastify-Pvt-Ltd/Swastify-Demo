@@ -6,7 +6,7 @@ import HeroSection from "@/components/hero-section"
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#F3F4F6] dark:bg-[#0A0A0C] ">
+    <main className="min-h-screen bg-[#F8F9FA] dark:bg-[#0A0A0C]">
       <Header />
       <HeroSection />
       {/* Features component temporarily disabled */}

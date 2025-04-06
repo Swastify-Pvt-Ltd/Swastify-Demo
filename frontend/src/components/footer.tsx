@@ -1,5 +1,5 @@
 "use client"
-
+import { FaTwitter } from "react-icons/fa"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -53,13 +53,18 @@ export default function Footer() {
               Where Healthcare Meets Innovation. <br /> Building solutions to real healthcare problems.
             </p>
             <div className="flex space-x-4">
-
               <Link href="https://www.linkedin.com/company/getswastify/" target="_blank" rel="noopener noreferrer">
-  <Button variant="ghost" size="icon" className="text-white/80 hover:text-white hover:bg-white/10">
-    <Linkedin className="h-5 w-5" />
-    <span className="sr-only">LinkedIn</span>
-  </Button>
-</Link>
+                <Button variant="ghost" size="icon" className="text-white/80 hover:text-white hover:bg-white/10">
+                  <Linkedin className="h-5 w-5" />
+                  <span className="sr-only">LinkedIn</span>
+                </Button>
+              </Link>
+              <Link href="https://x.com/getswastify/" target="_blank" rel="noopener noreferrer">
+                <Button variant="ghost" size="icon" className="text-white/80 hover:text-white hover:bg-white/10">
+                  <FaTwitter className="h-5 w-5" />
+                  <span className="sr-only">X (formerly Twitter)</span>
+                </Button>
+              </Link>
             </div>
           </div>
 

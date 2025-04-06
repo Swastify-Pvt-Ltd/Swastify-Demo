@@ -57,23 +57,23 @@
   --navy-lighter: #3f3f46; /* Updated to zinc-700 */
   --navy-darker: #09090b; /* Updated to zinc-950 darker */
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.141 0.005 285.823);
+  --background: oklch(0.99 0 0);
+  --foreground: oklch(0.2 0.005 285.823);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.141 0.005 285.823);
+  --card-foreground: oklch(0.2 0.005 285.823);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.141 0.005 285.823);
-  --primary: oklch(0.21 0.006 285.885);
+  --popover-foreground: oklch(0.2 0.005 285.823);
+  --primary: oklch(0.25 0.006 285.885);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.967 0.001 286.375);
-  --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.21 0.006 285.885);
+  --secondary: oklch(0.96 0.001 286.375);
+  --secondary-foreground: oklch(0.25 0.006 285.885);
+  --muted: oklch(0.96 0.001 286.375);
+  --muted-foreground: oklch(0.5 0.016 285.938);
+  --accent: oklch(0.96 0.001 286.375);
+  --accent-foreground: oklch(0.25 0.006 285.885);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
+  --border: oklch(0.9 0.004 286.32);
+  --input: oklch(0.9 0.004 286.32);
   --ring: oklch(0.705 0.015 286.067);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -81,13 +81,17 @@
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
   --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-primary: oklch(0.21 0.006 285.885);
+  --sidebar-foreground: oklch(0.2 0.005 285.823);
+  --sidebar-primary: oklch(0.25 0.006 285.885);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
-  --sidebar-border: oklch(0.92 0.004 286.32);
+  --sidebar-accent: oklch(0.96 0.001 286.375);
+  --sidebar-accent-foreground: oklch(0.25 0.006 285.885);
+  --sidebar-border: oklch(0.9 0.004 286.32);
   --sidebar-ring: oklch(0.705 0.015 286.067);
+
+  /* Contact page icon colors */
+  --icon-bg: rgba(1, 122, 52, 0.2);
+  --icon: #017a34;
 }
 
 .dark {
@@ -122,6 +126,10 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.552 0.016 285.938);
+
+  /* Contact page icon colors */
+  --icon-bg: rgba(164, 219, 77, 0.2);
+  --icon: #a4db4d;
 }
 
 @layer base {
@@ -150,5 +158,53 @@ body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
+}
+
+/* Add this for the glow animation effect */
+@keyframes glow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Add a more professional light theme styling */
+.light-theme-professional {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Fix for hydration mismatch in contact form */
+.text-icon {
+  color: var(--icon);
+}
+
+.bg-icon-bg {
+  background-color: var(--icon-bg);
+}
+
+/* Button styling for contact page */
+.dark .w-full.py-6 {
+  background-color: var(--light-green);
+  color: var(--navy);
+}
+
+.w-full.py-6 {
+  background-color: var(--deep-green);
+  color: white;
+}
+
+.dark .w-full.py-6:hover {
+  background-color: rgba(164, 219, 77, 0.9);
+}
+
+.w-full.py-6:hover {
+  background-color: rgba(1, 122, 52, 0.9);
 }
 

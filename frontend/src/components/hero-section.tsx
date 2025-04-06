@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
-import { Heart, Shield, MessageSquare, Stethoscope, Pill } from "lucide-react"
 
 export default function HeroSection() {
   const { resolvedTheme } = useTheme()
@@ -33,14 +32,15 @@ export default function HeroSection() {
       className={`w-full py-16 md:py-24 relative overflow-hidden min-h-screen flex justify-center items-center ${
         isDark
           ? "bg-gradient-to-b from-zinc-950 via-zinc-900 to-green-900/70"
-          : "bg-gradient-to-b from-gray-50 via-gray-100 to-green-50"
+          : "bg-gradient-to-b from-white via-gray-50 to-green-50/80"
       }`}
     >
       {/* Light mode specific background elements */}
       {!isDark && (
         <>
-          <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-b from-light-green/10 to-transparent rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-gradient-to-t from-deep-green/10 to-transparent rounded-full blur-3xl"></div>
+          <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-b from-light-green/20 to-transparent rounded-full blur-3xl animate-pulse-slow"></div>
+          <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-gradient-to-t from-deep-green/20 to-transparent rounded-full blur-3xl"></div>
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-tr from-blue-500/10 to-transparent rounded-full blur-3xl"></div>
         </>
       )}
 
@@ -58,7 +58,6 @@ export default function HeroSection() {
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         <div className="max-w-3xl mx-auto relative">
-          
           <div className="inline-block mb-4 px-4 py-1 rounded-full bg-gradient-to-r from-deep-green/10 to-light-green/10 dark:from-light-green/20 dark:to-deep-green/20 border border-deep-green/20 dark:border-light-green/30 animate-pulse">
             <span className="text-deep-green dark:text-light-green text-sm font-medium">Your Feedback Matters!</span>
           </div>
@@ -67,7 +66,7 @@ export default function HeroSection() {
             className={`text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight ${
               isDark
                 ? "bg-clip-text text-transparent bg-gradient-to-r from-white via-light-green to-white"
-                : "bg-clip-text text-transparent bg-gradient-to-r from-deep-green via-deep-green to-deep-green/80"
+                : "bg-clip-text text-transparent bg-gradient-to-r from-deep-green via-deep-green/90 to-blue-700/80"
             }`}
           >
             Tell Us Your Healthcare Struggles.
@@ -85,11 +84,14 @@ export default function HeroSection() {
                 isDark
                   ? "bg-gradient-to-r from-light-green to-deep-green hover:from-light-green/90 hover:to-deep-green/90 text-zinc-100"
                   : "bg-gradient-to-r from-deep-green to-deep-green/90 hover:from-deep-green/90 hover:to-deep-green text-white"
-              } font-medium px-6 py-6 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1`}
+              } font-medium px-6 py-6 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl relative overflow-hidden group`}
               onClick={() => document.getElementById("feedback-form")?.scrollIntoView({ behavior: "smooth" })}
             >
-              Share Your Experience
-              <ArrowRight className="ml-2 h-5 w-5" />
+              <span className="absolute inset-0 w-0 bg-white/20 transition-all duration-500 ease-out group-hover:w-full"></span>
+              <span className="relative flex items-center">
+                Share Your Experience
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </span>
             </Button>
 
             <Button
@@ -98,7 +100,7 @@ export default function HeroSection() {
                 isDark
                   ? "border-gray-600 text-gray-300 hover:bg-zinc-800 hover:text-light-green"
                   : "border-gray-300 text-zinc-700 hover:bg-gray-100 hover:text-deep-green"
-              } px-6 py-6 rounded-lg text-lg transition-all duration-300 hover:-translate-y-1`}
+              } px-6 py-6 rounded-lg text-lg transition-all duration-300`}
             >
               Learn More
             </Button>
