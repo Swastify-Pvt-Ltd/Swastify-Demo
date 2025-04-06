@@ -266,7 +266,7 @@ export default function FeedbackForm() {
                           />
                         </FormControl>
                         <FormDescription className={isDark ? "text-gray-400" : "text-zinc-600"}>
-                          Please be specific about the challenges you've faced.
+                          Please be specific about the challenges you&apos;ve faced.
                         </FormDescription>
                         <FormMessage className="text-red-500 dark:text-red-300" />
                       </FormItem>

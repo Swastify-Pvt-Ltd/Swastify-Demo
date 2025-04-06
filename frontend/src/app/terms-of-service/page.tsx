@@ -18,14 +18,14 @@ export default function TermsOfServicePage() {
 
             <div className="prose prose-lg dark:prose-invert max-w-none">
               <p className="text-zinc-700 dark:text-gray-300">
-                These Terms of Service ("Terms") govern your use of{" "}
+                These Terms of Service (&quot;Terms&quot;) govern your use of{" "}
                 <strong className="text-deep-green dark:text-light-green">Swastify</strong>. By accessing and using our
                 platform, you agree to comply with these Terms.
               </p>
 
               <h2 className="text-2xl font-bold mt-8 mb-4 text-zinc-900 dark:text-white">User Responsibilities</h2>
               <ul className="list-disc pl-5 space-y-2 text-zinc-700 dark:text-gray-300">
-                <li>You agree to provide accurate and truthful feedback on Swastify's platform.</li>
+                <li>You agree to provide accurate and truthful feedback on Swastify&apos;s platform.</li>
                 <li>You will not submit harmful, offensive, or illegal content.</li>
               </ul>
 

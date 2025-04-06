@@ -75,7 +75,7 @@ export default function HeroSection() {
           <p className={`text-xl md:text-2xl mb-8 leading-relaxed ${isDark ? "text-gray-300" : "text-zinc-700"}`}>
             Swastify is building a platform to solve real medical problems.
             <br />
-            and your story matters. Share what you've faced in the healthcare system.
+            and your story matters. Share what you&apos;ve faced in the healthcare system.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">

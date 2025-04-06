@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { toast } from "sonner"
-import { Mail, MapPin, CheckCircle2 } from "lucide-react"
+import { Mail, MapPin, CheckCircle2 } from 'lucide-react'
 import { useTheme } from "next-themes"
 import Link from "next/link"
 
@@ -63,7 +63,7 @@ export default function ContactPage() {
         form.reset()
         setIsSuccess(false)
       }, 3000)
-    } catch (error) {
+    } catch {
       toast.error("Failed to send message", {
         description: "Please try again later.",
       })
@@ -85,7 +85,7 @@ export default function ContactPage() {
             <div className="text-center mb-12">
               <h1 className="text-4xl md:text-5xl font-bold mb-6 text-zinc-900 dark:text-white">Contact Us</h1>
               <p className="text-xl text-zinc-700 dark:text-gray-300 max-w-3xl mx-auto">
-                Have questions or feedback? We'd love to hear from you. Get in touch with our team.
+                Have questions or feedback? We&apos;d love to hear from you. Get in touch with our team.
               </p>
             </div>
 
@@ -103,7 +103,7 @@ export default function ContactPage() {
                       />
                       <h3 className="text-xl font-bold mb-2 text-zinc-900 dark:text-white">Message Sent!</h3>
                       <p className="text-zinc-700 dark:text-gray-300">
-                        Thank you for reaching out. We'll get back to you as soon as possible.
+                        Thank you for reaching out. We&apos;ll get back to you as soon as possible.
                       </p>
                     </div>
                   ) : (
@@ -300,4 +300,3 @@ export default function ContactPage() {
     </main>
   )
 }
-
