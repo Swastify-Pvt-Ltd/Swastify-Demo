@@ -31,21 +31,12 @@ export default function AboutPage() {
 
             <div className="prose prose-lg dark:prose-invert max-w-none">
               <p className="text-zinc-700 dark:text-gray-300 mb-6">
-                Swastify was founded in 2023 with a simple yet powerful mission: to transform healthcare by listening to
+                Swastify was founded in 2025 with a simple yet powerful mission: to transform healthcare by listening to
                 the people who matter most—patients, caregivers, and healthcare professionals.
               </p>
 
-              <h2 className="text-2xl font-bold mt-8 mb-4 text-zinc-900 dark:text-white">Our Story</h2>
-              <p className="text-zinc-700 dark:text-gray-300 mb-6">
-                Our journey began when our founder, after experiencing firsthand the challenges within the healthcare
-                system, realized that many of the problems patients face could be solved if only there was a platform to
-                collect, analyze, and act on real feedback from real people.
-              </p>
-              <p className="text-zinc-700 dark:text-gray-300 mb-6">
-                What started as a simple feedback form has evolved into a comprehensive platform that connects patients'
-                experiences with innovative solutions. We believe that every healthcare challenge shared is an
-                opportunity to create meaningful change.
-              </p>
+              
+            
 
               <h2 className="text-2xl font-bold mt-8 mb-4 text-zinc-900 dark:text-white">Our Team</h2>
               <p className="text-zinc-700 dark:text-gray-300 mb-6">
