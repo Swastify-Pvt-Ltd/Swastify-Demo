@@ -1,7 +1,6 @@
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import AnimatedGradientBackground from "@/components/animated-gradient-background"
-import { CheckCircle2 } from "lucide-react"
+import { CheckCircle2 } from 'lucide-react'
 
 export const metadata = {
   title: "Our Mission | Swastify - Healthcare Feedback Platform",
@@ -12,7 +11,6 @@ export const metadata = {
 export default function MissionPage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 via-gray-100 to-light-green/20 dark:bg-gradient-to-b dark:from-zinc-950 dark:via-zinc-900 dark:to-green-900">
-      <AnimatedGradientBackground />
       <Header />
 
       <section className="w-full py-16 md:py-24 relative">
@@ -21,7 +19,7 @@ export default function MissionPage() {
             <div className="text-center mb-12">
               <h1 className="text-4xl md:text-5xl font-bold mb-6 text-zinc-900 dark:text-white">Our Mission</h1>
               <p className="text-xl text-zinc-700 dark:text-gray-300 max-w-3xl mx-auto">
-                We're on a mission to transform healthcare by connecting real experiences with innovative solutions.
+                We&apos;re on a mission to transform healthcare by connecting real experiences with innovative solutions.
               </p>
             </div>
 
@@ -29,7 +27,7 @@ export default function MissionPage() {
               <h2 className="text-2xl font-bold mt-8 mb-4 text-zinc-900 dark:text-white">Why We Exist</h2>
               <p className="text-zinc-700 dark:text-gray-300 mb-6">
                 Healthcare systems worldwide face similar challenges: rising costs, access barriers, and experiences
-                that often fail to meet patients' needs. At Swastify, we believe that the first step to solving these
+                that often fail to meet patients&apos; needs. At Swastify, we believe that the first step to solving these
                 problems is to listen to the people who experience them firsthand.
               </p>
               <p className="text-zinc-700 dark:text-gray-300 mb-6">
@@ -108,7 +106,7 @@ export default function MissionPage() {
 
               <h2 className="text-2xl font-bold mt-8 mb-4 text-zinc-900 dark:text-white">Our Impact Areas</h2>
               <p className="text-zinc-700 dark:text-gray-300 mb-6">
-                Based on the feedback we've collected so far, we're focusing our efforts on several key areas where we
+                Based on the feedback we&apos;ve collected so far, we&apos;re focusing our efforts on several key areas where we
                 believe we can make the biggest difference:
               </p>
 
@@ -132,7 +130,7 @@ export default function MissionPage() {
               <div className="bg-deep-green/10 dark:bg-light-green/10 p-6 rounded-lg my-12 border border-deep-green/20 dark:border-light-green/20 text-center">
                 <h3 className="text-2xl font-bold mb-4 text-deep-green dark:text-light-green">Join Our Mission</h3>
                 <p className="text-zinc-700 dark:text-gray-300 mb-6">
-                  Your healthcare experience matters. By sharing your story, you're helping us identify patterns and
+                  Your healthcare experience matters. By sharing your story, you&apos;re helping us identify patterns and
                   develop solutions that can improve healthcare for everyone.
                 </p>
                 <p className="text-zinc-700 dark:text-gray-300 font-medium">

@@ -31,7 +31,7 @@ export default function Features() {
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-zinc-900 dark:text-white mb-4">Why Share Your Experience?</h2>
           <p className="text-zinc-700 dark:text-gray-300 max-w-2xl mx-auto">
-            Your feedback is the foundation for building better healthcare solutions. Here's how your input makes a
+            Your feedback is the foundation for building better healthcare solutions. Here&apos;s how your input makes a
             difference:
           </p>
         </div>

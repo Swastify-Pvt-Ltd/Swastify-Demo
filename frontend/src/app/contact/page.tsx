@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import AnimatedGradientBackground from "@/components/animated-gradient-background"
+
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -15,6 +15,7 @@ import { toast } from "sonner"
 import { Mail, MapPin, CheckCircle2 } from "lucide-react"
 import { useTheme } from "next-themes"
 import Link from "next/link"
+import { supabase } from "@/lib/supabase"
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -48,10 +49,19 @@ export default function ContactPage() {
     setIsSubmitting(true)
 
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+      // Insert data into Supabase
+      const { error: supabaseError } = await supabase.from("contact_submissions").insert([
+        {
+          name: values.name,
+          email: values.email,
+          subject: values.subject,
+          message: values.message,
+          created_at: new Date().toISOString(),
+        },
+      ])
 
-      console.log(values)
+      if (supabaseError) throw new Error(supabaseError.message)
+
       setIsSuccess(true)
 
       toast.success("Message sent successfully", {
@@ -63,7 +73,9 @@ export default function ContactPage() {
         form.reset()
         setIsSuccess(false)
       }, 3000)
-    } catch (error) {
+    } catch (err) {
+      console.error("Error submitting contact form:", err)
+
       toast.error("Failed to send message", {
         description: "Please try again later.",
       })
@@ -76,7 +88,6 @@ export default function ContactPage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 via-gray-100 to-light-green/20 dark:bg-gradient-to-b dark:from-zinc-950 dark:via-zinc-900 dark:to-green-900">
-      <AnimatedGradientBackground />
       <Header />
 
       <section className="w-full py-16 md:py-24 relative">
@@ -85,7 +96,7 @@ export default function ContactPage() {
             <div className="text-center mb-12">
               <h1 className="text-4xl md:text-5xl font-bold mb-6 text-zinc-900 dark:text-white">Contact Us</h1>
               <p className="text-xl text-zinc-700 dark:text-gray-300 max-w-3xl mx-auto">
-                Have questions or feedback? We'd love to hear from you. Get in touch with our team.
+                Have questions or feedback? We&apos;d love to hear from you. Get in touch with our team.
               </p>
             </div>
 
@@ -103,7 +114,7 @@ export default function ContactPage() {
                       />
                       <h3 className="text-xl font-bold mb-2 text-zinc-900 dark:text-white">Message Sent!</h3>
                       <p className="text-zinc-700 dark:text-gray-300">
-                        Thank you for reaching out. We'll get back to you as soon as possible.
+                        Thank you for reaching out. We&apos;ll get back to you as soon as possible.
                       </p>
                     </div>
                   ) : (
