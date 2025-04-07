@@ -1,9 +1,10 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight } from 'lucide-react'
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
+import Image from "next/image"
 
 export default function HeroSection() {
   const { resolvedTheme } = useTheme()
@@ -57,28 +58,44 @@ export default function HeroSection() {
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-deep-green/5 via-transparent to-transparent dark:from-light-green/5 dark:via-transparent dark:to-transparent"></div>
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
-        <div className="max-w-3xl mx-auto relative">
-          <div className="inline-block mb-4 px-4 py-1 rounded-full bg-gradient-to-r from-deep-green/10 to-light-green/10 dark:from-light-green/20 dark:to-deep-green/20 border border-deep-green/20 dark:border-light-green/30 animate-pulse">
-            <span className="text-deep-green dark:text-light-green text-sm font-medium">Your Feedback Matters!</span>
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
+         
+          
+
+          {/* Hero Text Content */}
+          <div className="max-w-3xl mx-auto">
+            <div className="inline-block mb-4 px-4 py-1 rounded-full bg-gradient-to-r from-deep-green/10 to-light-green/10 dark:from-light-green/20 dark:to-deep-green/20 border border-deep-green/20 dark:border-light-green/30">
+              <span className="text-deep-green dark:text-light-green text-sm font-medium">Your Feedback Matters!</span>
+            </div>
+
+            <h1
+              className={`text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight relative ${
+                isDark
+                  ? "bg-clip-text text-transparent bg-gradient-to-r from-white via-light-green to-white"
+                  : "bg-clip-text text-transparent bg-gradient-to-r from-deep-green via-deep-green/90 to-blue-700/80"
+              }`}
+            >
+              <span>Tell Us Your</span>
+              <div className="hidden lg:inline-block w-56 h-56 absolute top-[-100] rotate-12">
+              <Image
+              src="/images/med-icon2.png"
+              alt="Medical mortar and pestle with pills"
+              width={150}
+              height={150}
+              className="object-contain w-full h-full"
+            />
           </div>
+              <br />
+              <span>Healthcare Struggles.</span>
+            </h1>
 
-          <h1
-            className={`text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight ${
-              isDark
-                ? "bg-clip-text text-transparent bg-gradient-to-r from-white via-light-green to-white"
-                : "bg-clip-text text-transparent bg-gradient-to-r from-deep-green via-deep-green/90 to-blue-700/80"
-            }`}
-          >
-            Tell Us Your Healthcare Struggles.
-          </h1>
+            <p className={`text-xl md:text-2xl mb-8 leading-relaxed ${isDark ? "text-gray-300" : "text-zinc-700"}`}>
+              Swastify is building a platform to solve real medical problems.
+              <br />
+              and your story matters. Share what you&apos;ve faced in the healthcare system.
+            </p>
 
-          <p className={`text-xl md:text-2xl mb-8 leading-relaxed ${isDark ? "text-gray-300" : "text-zinc-700"}`}>
-            Swastify is building a platform to solve real medical problems.
-            <br />
-            and your story matters. Share what you&apos;ve faced in the healthcare system.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
             <Button
               className={`${
                 isDark
@@ -105,6 +122,8 @@ export default function HeroSection() {
               Learn More
             </Button>
           </div>
+          </div>
+
         </div>
       </div>
     </section>

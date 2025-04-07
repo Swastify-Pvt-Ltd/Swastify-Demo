@@ -1,6 +1,5 @@
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import AnimatedGradientBackground from "@/components/animated-gradient-background"
 import { CheckCircle2 } from 'lucide-react'
 
 export const metadata = {
@@ -12,7 +11,6 @@ export const metadata = {
 export default function MissionPage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 via-gray-100 to-light-green/20 dark:bg-gradient-to-b dark:from-zinc-950 dark:via-zinc-900 dark:to-green-900">
-      <AnimatedGradientBackground />
       <Header />
 
       <section className="w-full py-16 md:py-24 relative">
