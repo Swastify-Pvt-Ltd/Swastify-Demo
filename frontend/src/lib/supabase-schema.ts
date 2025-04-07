@@ -17,7 +17,7 @@ export interface FeedbackSubmission {
     message: string
     created_at: string
     responded?: boolean
-    responded_at?: string
+    responded_at?: string | null
   }
   
   // Define database schema for type safety
