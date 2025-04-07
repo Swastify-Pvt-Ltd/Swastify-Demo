@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { validateSessionToken } from "@/lib/auth-utils"
+import { validateSessionTokenSync } from "@/lib/auth-utils"
 
 export function middleware(request: NextRequest) {
   // Get the response
@@ -20,8 +20,15 @@ export function middleware(request: NextRequest) {
   // Check for the session cookie
   const sessionCookie = request.cookies.get("swastify_admin_session")
 
+  // Debug logging
+  console.log("Middleware checking auth for:", request.nextUrl.pathname)
+  console.log("Session cookie exists:", !!sessionCookie)
+
   // If no session cookie or invalid token, redirect to login
-  if (!sessionCookie || !validateSessionToken(sessionCookie.value)) {
+  // Note: We use the sync version here because middleware doesn't support async validation
+  if (!sessionCookie || !validateSessionTokenSync(sessionCookie.value)) {
+    console.log("Auth failed, redirecting to login")
+
     // If this is already the admin login page, allow it
     if (request.nextUrl.pathname === "/admin/login") {
       return response
@@ -31,8 +38,11 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/admin/login", request.url))
   }
 
+  console.log("Auth successful")
+
   // If we have a valid session and we're on the login page, redirect to admin dashboard
   if (request.nextUrl.pathname === "/admin/login") {
+    console.log("Already logged in, redirecting to admin dashboard")
     return NextResponse.redirect(new URL("/admin", request.url))
   }
 

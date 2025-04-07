@@ -7,7 +7,7 @@ export async function GET() {
   // Check if the user is authenticated as admin
   const sessionCookie = (await cookies()).get("swastify_admin_session")
 
-  if (!sessionCookie || !validateSessionToken(sessionCookie.value)) {
+  if (!sessionCookie || !(await validateSessionToken(sessionCookie.value))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 

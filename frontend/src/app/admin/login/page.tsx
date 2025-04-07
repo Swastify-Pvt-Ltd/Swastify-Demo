@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -16,6 +16,28 @@ export default function AdminLoginPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
+
+  // Check if already logged in
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await fetch("/api/auth/check", {
+          method: "GET",
+        })
+
+        if (response.ok) {
+          const data = await response.json()
+          if (data.authenticated) {
+            router.push("/admin")
+          }
+        }
+      } catch (error) {
+        console.error("Auth check error:", error)
+      }
+    }
+
+    checkAuth()
+  }, [router])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -39,8 +61,12 @@ export default function AdminLoginPage() {
 
       if (data.success) {
         toast.success("Login successful")
-        router.push("/admin")
-        router.refresh() // Refresh to update the UI based on the new cookie
+
+        // Add a small delay to ensure the cookie is set
+        setTimeout(() => {
+          router.push("/admin")
+          router.refresh() // Refresh to update the UI based on the new cookie
+        }, 500)
       } else {
         throw new Error(data.message || "Authentication failed")
       }
