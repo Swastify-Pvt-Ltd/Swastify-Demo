@@ -2,7 +2,6 @@ import { type NextRequest, NextResponse } from "next/server"
 import { cookies } from "next/headers"
 import { rateLimiter } from "./rate-limiter"
 
-
 const ADMIN_USERNAME = process.env.NEXT_PUBLIC_ADMIN_USERNAME
 const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD
 const SESSION_SECRET = process.env.NEXT_PUBLIC_SESSION_SECRET // Used to sign session tokens
@@ -26,18 +25,12 @@ async function hashString(str: string): Promise<string> {
 }
 
 // Sign a token with the session secret
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function signToken(token: string): Promise<string> {
   // In a production app, you would use a proper HMAC here
   // For now, we'll concatenate the token with a hash of token+secret
   const signature = await hashString(token + SESSION_SECRET)
   return `${token}.${signature}`
-}
-
-// Validate the session token
-export function validateSessionToken(token: string): boolean {
-  // In a real application, you would validate the signature using the secret
-  // For now, we'll just check if the token exists and is properly formatted
-  return Boolean(token && token.length === 64 && /^[a-f0-9]+$/i.test(token))
 }
 
 // Get client IP address from request
@@ -115,9 +108,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
 export async function DELETE(): Promise<NextResponse> {
   // Clear the session cookie
-  (await
-    // Clear the session cookie
-    cookies()).delete("swastify_admin_session")
+  const cookieStore = await cookies()
+  cookieStore.delete("swastify_admin_session")
   return NextResponse.json({ success: true })
 }
 

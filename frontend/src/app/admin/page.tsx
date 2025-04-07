@@ -10,7 +10,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { toast } from "sonner"
-import { Eye, Search, CheckCircle, XCircle, LogOut, AlertCircle } from "lucide-react"
+import { Eye, Search, CheckCircle, XCircle, LogOut, AlertCircle, AlertTriangle } from "lucide-react"
 import { format } from "date-fns"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
@@ -25,10 +25,12 @@ export default function AdminPage() {
   const [selectedItem, setSelectedItem] = useState<FeedbackSubmission | ContactSubmission | null>(null)
   const [isViewModalOpen, setIsViewModalOpen] = useState(false)
   const [fetchError, setFetchError] = useState<string | null>(null)
+  const [blockedIPs, setBlockedIPs] = useState<{ ip: string; blockedUntil: Date }[]>([])
   const router = useRouter()
 
   useEffect(() => {
     fetchData()
+    fetchBlockedIPs() // Add this line
   }, [])
 
   const handleLogout = async () => {
@@ -81,6 +83,19 @@ export default function AdminPage() {
       toast.error("Failed to fetch data")
     } finally {
       setIsLoading(false)
+    }
+  }
+
+  const fetchBlockedIPs = async () => {
+    try {
+      const response = await fetch("/api/auth/blocked-ips")
+      if (!response.ok) {
+        throw new Error("Failed to fetch blocked IPs")
+      }
+      const data = await response.json()
+      setBlockedIPs(data.blockedIPs)
+    } catch (error) {
+      console.error("Error fetching blocked IPs:", error)
     }
   }
 
@@ -195,6 +210,30 @@ export default function AdminPage() {
             </Button>
           </div>
         </div>
+
+        {blockedIPs.length > 0 && (
+          <div className="mb-6 p-4 border border-amber-300 bg-amber-50 dark:bg-amber-900/20 dark:border-amber-800 rounded-md">
+            <div className="flex items-start">
+              <AlertTriangle className="h-5 w-5 mr-2 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+              <div>
+                <h3 className="font-medium text-amber-800 dark:text-amber-300">Blocked IP Addresses</h3>
+                <p className="text-sm text-amber-700 dark:text-amber-400 mb-2">
+                  The following IP addresses are currently blocked due to too many failed login attempts:
+                </p>
+                <ul className="text-sm space-y-1 text-amber-700 dark:text-amber-400">
+                  {blockedIPs.map((item, index) => (
+                    <li key={index}>
+                      IP: {item.ip} - Blocked until: {new Date(item.blockedUntil).toLocaleString()}
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-xs mt-2 text-amber-600 dark:text-amber-500">
+                  Note: This list will reset if the server restarts. For persistent blocking, consider using a database.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
 
         <Tabs defaultValue="feedback" value={selectedTab} onValueChange={setSelectedTab}>
           <TabsList className="mb-6">

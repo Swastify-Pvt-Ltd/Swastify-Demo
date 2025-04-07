@@ -9,7 +9,6 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { toast } from "sonner"
 import { AlertCircle } from "lucide-react"
-import { useTheme } from "next-themes"
 
 export default function AdminLoginPage() {
   const [username, setUsername] = useState("")
@@ -17,8 +16,6 @@ export default function AdminLoginPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
-  const { resolvedTheme } = useTheme()
-  const isDark = resolvedTheme === "dark"
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -58,7 +55,7 @@ export default function AdminLoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-zinc-900">
-      <Card className="w-full max-w-md bg-white  dark:bg-zinc-800 border-gray-200 dark:border-zinc-700">
+      <Card className="w-full max-w-md bg-white dark:bg-zinc-800 border-gray-200 dark:border-zinc-700">
         <CardHeader>
           <CardTitle className="text-zinc-900 dark:text-white">Admin Login</CardTitle>
           <CardDescription className="text-zinc-600 dark:text-zinc-300">
