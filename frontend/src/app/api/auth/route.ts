@@ -1,11 +1,10 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { cookies } from "next/headers"
 import { rateLimiter } from "./rate-limiter"
+import { signToken } from "@/lib/auth-utils"
 
-
-const ADMIN_USERNAME = process.env.NEXT_PUBLIC_ADMIN_USERNAME
-const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD
-const SESSION_SECRET = process.env.NEXT_PUBLIC_SESSION_SECRET // Used to sign session tokens
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD
 
 // Generate a secure session token using Web Crypto API (Edge Runtime compatible)
 async function generateSessionToken(): Promise<string> {
@@ -14,30 +13,6 @@ async function generateSessionToken(): Promise<string> {
   return Array.from(array)
     .map((b) => b.toString(16).padStart(2, "0"))
     .join("")
-}
-
-// Hash a string using Web Crypto API (Edge Runtime compatible)
-async function hashString(str: string): Promise<string> {
-  const encoder = new TextEncoder()
-  const data = encoder.encode(str)
-  const hashBuffer = await crypto.subtle.digest("SHA-256", data)
-  const hashArray = Array.from(new Uint8Array(hashBuffer))
-  return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("")
-}
-
-// Sign a token with the session secret
-async function signToken(token: string): Promise<string> {
-  // In a production app, you would use a proper HMAC here
-  // For now, we'll concatenate the token with a hash of token+secret
-  const signature = await hashString(token + SESSION_SECRET)
-  return `${token}.${signature}`
-}
-
-// Validate the session token
-export function validateSessionToken(token: string): boolean {
-  // In a real application, you would validate the signature using the secret
-  // For now, we'll just check if the token exists and is properly formatted
-  return Boolean(token && token.length === 64 && /^[a-f0-9]+$/i.test(token))
 }
 
 // Get client IP address from request
@@ -80,31 +55,41 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     const { username, password } = (await request.json()) as { username: string; password: string }
 
+    // Debug log to check credentials
+    console.log(`Login attempt - Username: ${username}, Expected: ${ADMIN_USERNAME}`)
+
     // Validate credentials
     if (username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) {
+      console.log("Invalid credentials")
       return NextResponse.json({ success: false, message: "Invalid credentials" }, { status: 401 })
     }
+
+    console.log("Credentials validated successfully")
 
     // Reset rate limit after successful login
     rateLimiter.resetLimit(clientIp)
 
     // Generate a session token
-    const sessionToken = await generateSessionToken()
+    const rawToken = await generateSessionToken()
 
-    // In a real application, you would store this token in a database
-    // along with the user ID and expiration time
+    // Sign the token
+    const signedToken = await signToken(rawToken)
+
+    console.log("Generated token:", signedToken)
 
     // Set a secure HTTP-only cookie
     const cookieStore = await cookies()
     cookieStore.set({
       name: "swastify_admin_session",
-      value: sessionToken,
+      value: signedToken,
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
       path: "/",
       maxAge: 60 * 60 * 24, // 24 hours
     })
+
+    console.log("Cookie set successfully")
 
     return NextResponse.json({ success: true })
   } catch (error) {
@@ -115,9 +100,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
 export async function DELETE(): Promise<NextResponse> {
   // Clear the session cookie
-  (await
-    // Clear the session cookie
-    cookies()).delete("swastify_admin_session")
+  const cookieStore = await cookies()
+  cookieStore.set("swastify_admin_session", "", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+    path: "/",
+    maxAge: 0, // Expire immediately
+  })
   return NextResponse.json({ success: true })
 }
 

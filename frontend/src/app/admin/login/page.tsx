@@ -2,14 +2,13 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { toast } from "sonner"
 import { AlertCircle } from "lucide-react"
-import { useTheme } from "next-themes"
 
 export default function AdminLoginPage() {
   const [username, setUsername] = useState("")
@@ -17,8 +16,28 @@ export default function AdminLoginPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
-  const { resolvedTheme } = useTheme()
-  const isDark = resolvedTheme === "dark"
+
+  // Check if already logged in
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await fetch("/api/auth/check", {
+          method: "GET",
+        })
+
+        if (response.ok) {
+          const data = await response.json()
+          if (data.authenticated) {
+            router.push("/admin")
+          }
+        }
+      } catch (error) {
+        console.error("Auth check error:", error)
+      }
+    }
+
+    checkAuth()
+  }, [router])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -42,8 +61,12 @@ export default function AdminLoginPage() {
 
       if (data.success) {
         toast.success("Login successful")
-        router.push("/admin")
-        router.refresh() // Refresh to update the UI based on the new cookie
+
+        // Add a small delay to ensure the cookie is set
+        setTimeout(() => {
+          router.push("/admin")
+          router.refresh() // Refresh to update the UI based on the new cookie
+        }, 500)
       } else {
         throw new Error(data.message || "Authentication failed")
       }
@@ -58,7 +81,7 @@ export default function AdminLoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-zinc-900">
-      <Card className="w-full max-w-md bg-white  dark:bg-zinc-800 border-gray-200 dark:border-zinc-700">
+      <Card className="w-full max-w-md bg-white dark:bg-zinc-800 border-gray-200 dark:border-zinc-700">
         <CardHeader>
           <CardTitle className="text-zinc-900 dark:text-white">Admin Login</CardTitle>
           <CardDescription className="text-zinc-600 dark:text-zinc-300">
