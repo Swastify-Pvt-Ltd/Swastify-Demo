@@ -189,26 +189,6 @@ body {
   background-color: var(--icon-bg);
 }
 
-/* Button styling for contact page */
-/* Remove the green button styling for dark mode in contact page */
-.dark .w-full.py-6:not(.feedback-submit-btn) {
-  background-color: var(--zinc-700);
-  color: white;
-}
-
-.w-full.py-6:not(.feedback-submit-btn) {
-  background-color: var(--zinc-900);
-  color: white;
-}
-
-.dark .w-full.py-6:not(.feedback-submit-btn):hover {
-  background-color: var(--zinc-600);
-}
-
-.w-full.py-6:not(.feedback-submit-btn):hover {
-  background-color: var(--zinc-800);
-}
-
 /* Feedback form submit button styles */
 .feedback-submit-btn.dark {
   background: linear-gradient(to right, var(--light-green), var(--deep-green)) !important;
