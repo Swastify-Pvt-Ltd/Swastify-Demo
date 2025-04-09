@@ -16,7 +16,7 @@ export const metadata = {
   openGraph: {
     title: "Swastify - Healthcare Platform",
     description: "Swastify is building a comprehensive healthcare solution with user feedback shaping its development.",
-    url: "https://swastifyai.com", // Update with your site URL
+    url: "https://swastify.life", // Updated to your correct site URL
     siteName: "Swastify",
     images: [
       {
@@ -36,7 +36,7 @@ export const metadata = {
     image: "/images/swastify-logo.png", // Image for Twitter Card
   },
   social: {
-    linkedin: "https://linkedin.com/company/swastify",
+    linkedin: "https://linkedin.com/company/getswastify",
     twitter: "https://x.com/getswastify",
   },
 }
@@ -58,4 +58,3 @@ export default function RootLayout({
     </html>
   )
 }
-
