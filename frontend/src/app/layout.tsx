@@ -48,6 +48,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <meta name="google-site-verification" content="a2FAvi39LjBMje-T4K-Cken3FLyXFcjsy8jiw5g41bo" />
       <body className={inter.className} suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
           <NotificationBanner />
