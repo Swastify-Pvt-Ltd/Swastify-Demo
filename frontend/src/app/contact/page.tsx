@@ -199,7 +199,11 @@ export default function ContactPage() {
 
                         <Button
                           type="submit"
-                          className="w-full py-6 text-lg font-medium transition-colors duration-300"
+                          className={`w-full py-6 text-lg font-medium transition-colors duration-300 ${
+                            isDark
+                              ? "bg-light-green text-zinc-900 hover:bg-light-green/90"
+                              : "bg-deep-green text-white hover:bg-deep-green/90"
+                          }`}
                           disabled={isSubmitting}
                         >
                           {isSubmitting ? "Sending..." : "Send Message"}
