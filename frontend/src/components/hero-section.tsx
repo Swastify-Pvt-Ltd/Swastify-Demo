@@ -134,7 +134,7 @@ export default function HeroSection() {
                     ? "border-gray-600 text-gray-300 hover:bg-zinc-800 hover:text-light-green"
                     : "border-gray-300 text-zinc-700 hover:bg-gray-100 hover:text-deep-green"
                 } px-6 py-6 rounded-lg text-lg transition-all duration-300`}>
-                Learn More
+                Sneak Peek Soon
               </Button>
             </div>
           </div>
