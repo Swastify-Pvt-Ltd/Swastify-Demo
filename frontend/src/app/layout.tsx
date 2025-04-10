@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/theme-provider";
 import NotificationBanner from "@/components/notification-banner";
+import { Analytics } from "@vercel/analytics/react"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,7 @@ export const metadata = {
     siteName: "Swastify",
     images: [
       {
-        url: "https://swastify.life/images/swastify-logo.png", // Image for Open Graph
+        url: "https://swastify.life/images/swastify-logo.png", 
         width: 800,
         height: 800,
         alt: "Swastify Logo",
@@ -36,7 +37,7 @@ export const metadata = {
     title: "Swastify - Healthcare Platform",
     description:
       "Swastify is building a comprehensive healthcare solution with user feedback shaping its development.",
-    image: ["https://swastify.life/images/swastify-logo.png"], // Image for Twitter Card
+    image: ["https://swastify.life/images/swastify-logo.png"], 
   },
   social: {
     linkedin: "https://linkedin.com/company/getswastify",
@@ -84,6 +85,7 @@ export default function RootLayout({
           disableTransitionOnChange>
           <NotificationBanner />
           {children}
+          <Analytics />
           <Toaster />
         </ThemeProvider>
       </body>
