@@ -11,14 +11,18 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "Swastify - Healthcare Platform",
   description:
-    "Swastify is building a comprehensive healthcare solution with user feedback shaping its development.",
-  icons: {
-    icon: "/images/swastify-logo.png",
-  },
+    "Swastify is a modern healthcare platform designed to transform the way individuals and organizations interact with the healthcare ecosystem. Its goal is to provide an easy-to-use, reliable solution that addresses the needs of patients, doctors, hospitals, and healthcare administrators. Swastify seeks to improve accessibility, efficiency, and the overall healthcare experience by offering a centralized digital space for managing medical-related services. The platform is built with the vision of becoming a trusted and essential tool in the healthcare industry, providing a seamless and secure experience for all users.",
+    icons: {
+      icon: [
+        { url: '/favicon.ico' },
+        { url: '/images/swastify-logo.png' }
+      ],
+      apple: { url: '/images/swastify-logo.png' }
+    },
   openGraph: {
     title: "Swastify - Healthcare Platform",
     description:
-      "Swastify is building a comprehensive healthcare solution with user feedback shaping its development.",
+      "Swastify is a modern healthcare platform designed to transform the way individuals and organizations interact with the healthcare ecosystem. Its goal is to provide an easy-to-use, reliable solution that addresses the needs of patients, doctors, hospitals, and healthcare administrators. Swastify seeks to improve accessibility, efficiency, and the overall healthcare experience by offering a centralized digital space for managing medical-related services. The platform is built with the vision of becoming a trusted and essential tool in the healthcare industry, providing a seamless and secure experience for all users.",
     url: "https://swastify.life", // Updated to your correct site URL
     siteName: "Swastify",
     images: [
@@ -36,7 +40,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Swastify - Healthcare Platform",
     description:
-      "Swastify is building a comprehensive healthcare solution with user feedback shaping its development.",
+      "Swastify is a modern healthcare platform designed to transform the way individuals and organizations interact with the healthcare ecosystem. Its goal is to provide an easy-to-use, reliable solution that addresses the needs of patients, doctors, hospitals, and healthcare administrators. Swastify seeks to improve accessibility, efficiency, and the overall healthcare experience by offering a centralized digital space for managing medical-related services. The platform is built with the vision of becoming a trusted and essential tool in the healthcare industry, providing a seamless and secure experience for all users.",
     image: ["https://swastify.life/images/swastify-logo.png"], 
   },
   social: {
@@ -52,6 +56,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <meta name="apple-mobile-web-app-title" content="Swastify" />
       <meta
         name="google-site-verification"
         content="a2FAvi39LjBMje-T4K-Cken3FLyXFcjsy8jiw5g41bo"
@@ -59,7 +64,7 @@ export default function RootLayout({
       <meta property="og:title" content="Swastify - Healthcare Platform" />
       <meta
         property="og:description"
-        content="Swastify is building a comprehensive healthcare solution with user feedback shaping its development."
+        content="Swastify is a modern healthcare platform designed to transform the way individuals and organizations interact with the healthcare ecosystem. Its goal is to provide an easy-to-use, reliable solution that addresses the needs of patients, doctors, hospitals, and healthcare administrators. Swastify seeks to improve accessibility, efficiency, and the overall healthcare experience by offering a centralized digital space for managing medical-related services. The platform is built with the vision of becoming a trusted and essential tool in the healthcare industry, providing a seamless and secure experience for all users."
       />
       <meta
         property="og:image"
