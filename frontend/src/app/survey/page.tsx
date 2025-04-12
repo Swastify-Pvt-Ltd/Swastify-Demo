@@ -186,7 +186,7 @@ export default function SurveyPage() {
     }
   }
 
-  // Replace the nextStep function with this updated version that uses toast messages
+  // Replace the nextStep function with this updated version that properly validates section 3
   const nextStep = () => {
     const fieldsToValidate: Record<number, { field: FormFieldType; label: string }[]> = {
       1: [
@@ -230,6 +230,12 @@ export default function SurveyPage() {
       return
     }
 
+    // Special case for otherContact
+    if (currentStep === 3 && form.getValues("contactedHelp") === "Other" && !form.getValues("otherContact")) {
+      toast.error("Please specify who you contacted")
+      return
+    }
+
     if (emptyFields.length > 0) {
       const fieldLabels = emptyFields.map((f) => f.label).join(", ")
       toast.error(`Please fill in the following: ${fieldLabels}`)
@@ -244,7 +250,7 @@ export default function SurveyPage() {
       }
     } else {
       // Submit form on last step
-      onSubmit(form.getValues())
+      form.handleSubmit(onSubmit)()
     }
   }
 
@@ -879,7 +885,7 @@ export default function SurveyPage() {
 
                       <Button
                         type="button"
-                        onClick={currentStep === totalSteps ? form.handleSubmit(onSubmit) : nextStep}
+                        onClick={nextStep}
                         disabled={isSubmitting}
                         className={`cursor-pointer ${
                           isDark
