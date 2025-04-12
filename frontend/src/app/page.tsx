@@ -2,7 +2,7 @@ import FeedbackForm from "@/components/feedback-form"
 import Footer from "@/components/footer"
 import Header from "@/components/header"
 import HeroSection from "@/components/hero-section"
-// import Features from "@/components/features"
+import Features from "@/components/features"
 
 export default function Home() {
   return (
@@ -10,7 +10,7 @@ export default function Home() {
       <Header />
       <HeroSection />
       {/* Features component temporarily disabled */}
-      {/* <Features /> */}
+      <Features />
       <FeedbackForm />
       <Footer />
     </main>
