@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function HeroSection() {
   const { resolvedTheme } = useTheme();
@@ -127,15 +128,19 @@ export default function HeroSection() {
                 </span>
               </Button>
 
-              <Button
-                variant="outline"
-                className={`${
-                  isDark
-                    ? "border-gray-600 text-gray-300 hover:bg-zinc-800 hover:text-light-green"
-                    : "border-gray-300 text-zinc-700 hover:bg-gray-100 hover:text-deep-green"
-                } px-6 py-6 rounded-lg text-lg transition-all duration-300`}>
-                Sneak Peek Soon
-              </Button>
+<Button
+  asChild
+  variant="outline"
+  className={`${
+    isDark
+      ? "border-gray-600 text-gray-300 hover:bg-zinc-800 hover:text-light-green"
+      : "border-gray-300 text-zinc-700 hover:bg-gray-100 hover:text-deep-green"
+  } px-6 py-6 rounded-lg transition-all duration-300`}
+>
+  <Link href="https://app.swastify.life/dashboard">
+    Enter Beta Experience
+  </Link>
+</Button>
             </div>
           </div>
         </div>
